@@ -1,108 +1,106 @@
 import React from 'react';
 import styled from 'styled-components';
 
-class DetailDrivers extends React.Component {
-  render() {
-    return (
-      <General>
-        <DetailMain>
-          {/* 기사님 정보 */}
-          <DriverTitle>
-            <TitleContent>
-              <h1>[Watta Taxi] 이다슬 기사님</h1>
-            </TitleContent>
-            <TitleRating>
-              <ReviewStar>
+function DetailDrivers() {
+  return (
+    <General>
+      <DetailMain>
+        {/* 기사님 정보 */}
+        <DriverTitle>
+          <TitleContent>
+            <h1>[Watta Taxi] 이다슬 기사님</h1>
+          </TitleContent>
+          <TitleRating>
+            <ReviewStar>
+              <i className="fas fa-star"></i>
+              <i className="fas fa-star"></i>
+              <i className="fas fa-star"></i>
+              <i className="fas fa-star"></i>
+              <i className="fas fa-star"></i>
+            </ReviewStar>
+            <TitleRatingGrade>
+              <p>4.5</p>
+            </TitleRatingGrade>
+          </TitleRating>
+        </DriverTitle>
+        <DriverDescription>
+          <DriverImg
+            alt="기사님 사진"
+            src="https://i.pinimg.com/564x/04/3b/84/043b84c637e4452d658c3cf34337df4d.jpg"
+          />
+          <DriverIntroduction>
+            <div>성함 : </div>
+            <div>회사 : </div>
+            <div>소개 : </div>
+            <div>평균 별점 : </div>
+          </DriverIntroduction>
+        </DriverDescription>
+        {/* 댓글창 */}
+        <CommentContainer>
+          <CommentTitle>후기</CommentTitle>
+          <CommentLine></CommentLine>
+          <CommentHeader>
+            <CommentRating>
+              <CommentRatingTitle>이용자 별점</CommentRatingTitle>
+              <CommentRatingGrade>4.5</CommentRatingGrade>
+            </CommentRating>
+            <CommentDetail>
+              <p>와따 택시 운행에 만족하셨나요?</p>
+              <RatingStar>
                 <i className="fas fa-star"></i>
                 <i className="fas fa-star"></i>
                 <i className="fas fa-star"></i>
                 <i className="fas fa-star"></i>
                 <i className="fas fa-star"></i>
-              </ReviewStar>
-              <TitleRatingGrade>
-                <p>4.5</p>
-              </TitleRatingGrade>
-            </TitleRating>
-          </DriverTitle>
-          <DriverDescription>
-            <DriverImg
-              alt="기사님 사진"
-              src="https://i.pinimg.com/564x/04/3b/84/043b84c637e4452d658c3cf34337df4d.jpg"
-            />
-            <DriverIntroduction>
-              <div>성함 : </div>
-              <div>회사 : </div>
-              <div>소개 : </div>
-              <div>평균 별점 : </div>
-            </DriverIntroduction>
-          </DriverDescription>
-          {/* 댓글창 */}
-          <CommentContainer>
-            <CommentTitle>후기</CommentTitle>
-            <CommentLine></CommentLine>
-            <CommentHeader>
-              <CommentRating>
-                <CommentRatingTitle>이용자 별점</CommentRatingTitle>
-                <CommentRatingGrade>4.5</CommentRatingGrade>
-              </CommentRating>
-              <CommentDetail>
-                <p>와따 택시 운행에 만족하셨나요?</p>
-                <RatingStar>
+              </RatingStar>
+              <CommentInput></CommentInput>
+              <CommentButton>등록</CommentButton>
+            </CommentDetail>
+          </CommentHeader>
+          <Review>
+            <ReviewContainer>
+              <UserContainer>
+                <ReviewStar>
                   <i className="fas fa-star"></i>
                   <i className="fas fa-star"></i>
                   <i className="fas fa-star"></i>
                   <i className="fas fa-star"></i>
                   <i className="fas fa-star"></i>
-                </RatingStar>
-                <CommentInput></CommentInput>
-                <CommentButton>등록</CommentButton>
-              </CommentDetail>
-            </CommentHeader>
-            <Review>
-              <ReviewContainer>
-                <UserContainer>
-                  <ReviewStar>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                  </ReviewStar>
-                  <Reviewer>daseul</Reviewer>
-                </UserContainer>
-                <ReviewContents>
-                  <p>택시 기사님이 너무 친절하셔서 기분이 좋았습니다.</p>
-                </ReviewContents>
-                <ReviewDeleteButton>
-                  <i class="fas fa-trash"></i>
-                </ReviewDeleteButton>
-              </ReviewContainer>
-            </Review>
-          </CommentContainer>
-        </DetailMain>
-        {/* 예약창 */}
-        <DetailSide>
-          <DateButton>
-            <i class="fas fa-calendar-week"></i>
-            <p>날짜를 선택해주세요</p>
-          </DateButton>
-          <DateButton>
-            <i class="far fa-clock"></i>
-            <p>시간을 선택해주세요</p>
-          </DateButton>
-          <ButtonContainer>
-            <SeatButton>특가석</SeatButton>
-            <SeatButton>일반석</SeatButton>
-            <SeatButton>특별석</SeatButton>
-            <CalculationButton>금액 조회하기</CalculationButton>
-          </ButtonContainer>
-          <ReserveLine></ReserveLine>
-          <Price>20,000원</Price>
-          <ReservationButton>예약하기</ReservationButton>
-        </DetailSide>
-      </General>
-    );
-  }
+                </ReviewStar>
+                <Reviewer>daseul</Reviewer>
+              </UserContainer>
+              <ReviewContents>
+                <p>택시 기사님이 너무 친절하셔서 기분이 좋았습니다.</p>
+              </ReviewContents>
+              <ReviewDeleteButton>
+                <i class="fas fa-trash"></i>
+              </ReviewDeleteButton>
+            </ReviewContainer>
+          </Review>
+        </CommentContainer>
+      </DetailMain>
+      {/* 예약창 */}
+      <DetailSide>
+        <DateButton>
+          <i class="fas fa-calendar-week"></i>
+          <p>날짜를 선택해주세요</p>
+        </DateButton>
+        <DateButton>
+          <i class="far fa-clock"></i>
+          <p>시간을 선택해주세요</p>
+        </DateButton>
+        <ButtonContainer>
+          <SeatButton>특가석</SeatButton>
+          <SeatButton>일반석</SeatButton>
+          <SeatButton>특별석</SeatButton>
+          <CalculationButton>금액 조회하기</CalculationButton>
+        </ButtonContainer>
+        <ReserveLine></ReserveLine>
+        <Price>20,000원</Price>
+        <ReservationButton>예약하기</ReservationButton>
+      </DetailSide>
+    </General>
+  );
 }
 
 export default DetailDrivers;
