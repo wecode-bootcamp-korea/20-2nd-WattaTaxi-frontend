@@ -1,7 +1,29 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import styled, { css } from 'styled-components';
 
 function DetailComments() {
+  const [starValue, SetstarValue] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
+
+  // star value 계산 함수 (index까지 true로 바꿔서 배열 리턴)
+  const updateArr = (test, index) => {
+    for (let i = 0; i < test.length; i++) {
+      if (index < i) {
+        test[i] = false;
+      } else {
+        test[i] = true;
+      }
+    }
+    return test;
+  };
+
+  console.log(starValue);
+
   return (
     <CommentContainer>
       <CommentTitle>후기</CommentTitle>
@@ -14,11 +36,13 @@ function DetailComments() {
         <CommentDetail>
           <p>와따 택시 운행에 만족하셨나요?</p>
           <RatingStar>
-            <i className="fas fa-star"></i>
-            <i className="fas fa-star"></i>
-            <i className="fas fa-star"></i>
-            <i className="fas fa-star"></i>
-            <i className="fas fa-star"></i>
+            {starValue.map((eachStarValue, starIndex) => (
+              <button
+                onClick={() => SetstarValue(updateArr(starValue, starIndex))}
+              >
+                <I color={eachStarValue} className="fas fa-star" />
+              </button>
+            ))}
           </RatingStar>
           <CommentInput></CommentInput>
           <CommentButton>등록</CommentButton>
@@ -125,11 +149,14 @@ const CommentDetail = styled.section`
 const RatingStar = styled.div`
   margin-bottom: 10px;
 
-  i {
-    font-size: 40px;
-    color: #666666;
-    margin: 5px;
+  button {
   }
+`;
+
+const I = styled.i`
+  color: ${props => (props.color ? 'yellow' : 'gray')};
+  font-size: 40px;
+  margin: 5px;
 `;
 
 const CommentButton = styled.button`
@@ -195,6 +222,6 @@ const ReviewStar = styled.div`
 
   i {
     font-size: 10px;
-    color: grey;
+    color: gray;
   }
 `;
