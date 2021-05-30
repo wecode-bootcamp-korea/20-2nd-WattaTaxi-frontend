@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-function DetailComments() {
+const DetailComments = () => {
   const [starValue, SetstarValue] = useState([
     false,
     false,
@@ -9,20 +9,16 @@ function DetailComments() {
     false,
     false,
   ]);
+  const [commentValue, SetcommentValue] = useState([]);
 
   // star value 계산 함수 (index까지 true로 바꿔서 배열 리턴)
-  const updateArr = (test, index) => {
-    for (let i = 0; i < test.length; i++) {
-      if (index < i) {
-        test[i] = false;
-      } else {
-        test[i] = true;
-      }
+  const updateStarValue = index => {
+    let booleanStar = [...starValue];
+    for (let i = 0; i < starValue.length; i++) {
+      index >= i ? (booleanStar[i] = true) : (booleanStar[i] = false);
     }
-    return test;
+    SetstarValue(booleanStar);
   };
-
-  console.log(starValue);
 
   return (
     <CommentContainer>
@@ -30,16 +26,14 @@ function DetailComments() {
       <CommentLine></CommentLine>
       <CommentHeader>
         <CommentRating>
-          <CommentRatingTitle>이용자 별점</CommentRatingTitle>
+          <CommentRatingTitle>후기 평균 별점</CommentRatingTitle>
           <CommentRatingGrade>4.5</CommentRatingGrade>
         </CommentRating>
         <CommentDetail>
           <p>와따 택시 운행에 만족하셨나요?</p>
           <RatingStar>
             {starValue.map((eachStarValue, starIndex) => (
-              <button
-                onClick={() => SetstarValue(updateArr(starValue, starIndex))}
-              >
+              <button onClick={() => updateStarValue(starIndex)}>
                 <I color={eachStarValue} className="fas fa-star" />
               </button>
             ))}
@@ -70,7 +64,7 @@ function DetailComments() {
       </Review>
     </CommentContainer>
   );
-}
+};
 
 export default DetailComments;
 
@@ -148,13 +142,10 @@ const CommentDetail = styled.section`
 
 const RatingStar = styled.div`
   margin-bottom: 10px;
-
-  button {
-  }
 `;
 
 const I = styled.i`
-  color: ${props => (props.color ? 'yellow' : 'gray')};
+  color: ${props => (props.color ? ({ theme }) => theme.main : 'gray')};
   font-size: 40px;
   margin: 5px;
 `;
