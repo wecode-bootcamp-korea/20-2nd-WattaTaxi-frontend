@@ -1,0 +1,21 @@
+result = [{
+  ‘price’ : schedule.price,
+  ‘seat_remain’ : schedule.seat_remain,
+  ‘date’ : schedule.date,
+  ‘courses’ : {
+      ‘departure_time’ : schedule.course.departure_time,
+      ‘arrival_time’ : schedule.course.arrival_time,
+      ‘taxi_code’ : schedule.course.taxi_code,
+      ‘arrival_location’ : schedule.course.arrival_location.name,
+      ‘departure_location’ : schedule.course.departure_location.name,
+      ‘taxi_company’ : schedule.course.taxi_company.name
+  },
+  ‘seat_type’ : {
+      ‘seat_name’ : schedule.seat_type.name,
+      ‘sale_rate’ : schedule.seat_type.sale_rate},
+  ‘taxi_driver’ : {
+      ‘taxi_driver_name’ : schedule.taxi_driver.name,
+      ‘taxi_company’ : schedule.taxi_driver.taxi_company.name,
+      ‘profile_url’ : schedule.taxi_driver.profile_url,
+      ‘introduction’ : schedule.taxi_driver.introduction
+      }

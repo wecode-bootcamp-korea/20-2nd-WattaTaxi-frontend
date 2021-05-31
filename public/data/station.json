@@ -1,0 +1,22 @@
+{
+  "station": [
+    {
+      "id": 1,
+      "stationCode": "MWN",
+      "stationName": "망원",
+      "longitude": "126.89459",
+      "latitude": "37.55538",
+      "imageUrl": "https://trello-attachments.s3.amazonaws.com/60ab4c70829d341c2cd7029a/600x336/05ccd38487ec264254152319236c151c/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-05-24_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_3.48.26.png",
+      "description": "42여 개의 한강 코스"
+    },
+    {
+      "id": 2,
+      "stationCode": "SUD",
+      "stationName": "선유도",
+      "longitude": "126.89948",
+      "latitude": "37.54440",
+      "imageUrl": "https://trello-attachments.s3.amazonaws.com/60ab4c70829d341c2cd7029a/599x335/114e3cf9eee4d77dd1d298df45dbdd13/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-05-24_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_3.48.09.png",
+      "description": "6여 개의 한강 코스"
+    }
+  ]
+}
