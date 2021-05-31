@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
-import Date from './Components/Date';
+import DateInput from './Components/DateInput';
 import Passenger from './Components/Passenger';
 import Button from '../Button';
 import Location from './Components/Location';
+import { API } from '../../config';
 
 function SearchBar({ isRoundTrip, history }) {
-  const [isModalOn, setIsModalOn] = useState({
+  const [selectBoxState, setSelectBoxState] = useState({
     departure: false,
     arrival: false,
     date: false,
     passenger: false,
   });
+  const [spots, setSpots] = useState({});
   const [departure, setDeparture] = useState({
     name: '망원',
     code: 'MWN',
@@ -21,19 +23,26 @@ function SearchBar({ isRoundTrip, history }) {
     name: '',
     code: '',
   });
+  const [date, setDate] = useState([]);
   const [passenger, setPassenger] = useState(1);
   const [seat, setSeat] = useState('일반석');
 
+  useEffect(() => {
+    fetch(API.STATION_TEST)
+      .then(spots => spots.json())
+      .then(spots => setSpots(spots.station));
+  }, []);
+
   const openModal = e => {
     const { name } = e.target;
-    for (let key in isModalOn) {
-      isModalOn[key] = false;
+    for (let key in selectBoxState) {
+      selectBoxState[key] = false;
     }
-    setIsModalOn({ ...isModalOn, [name]: true });
+    setSelectBoxState({ ...selectBoxState, [name]: true });
   };
 
   const closeModal = name => {
-    setIsModalOn(prev => ({ ...prev, [name]: false }));
+    setSelectBoxState(prev => ({ ...prev, [name]: false }));
   };
 
   const switchSpot = e => {
@@ -49,10 +58,12 @@ function SearchBar({ isRoundTrip, history }) {
     if (passenger > 0) setPassenger(prev => --prev);
   };
 
-  const goToList = (departure, arrival) => {
-    if (departure.name && arrival.name && seat) {
+  const search = () => {
+    if (departure.name && arrival.name && date[0] && passenger && seat) {
       history.push(
-        `/list?departure_location_name=${departure.name}&arrival_location_name=${arrival.name}&seat_type_name=${seat}`
+        `/list/${Object.values(departure)}/${Object.values(
+          arrival
+        )}/${date}/${seat}`
       );
     } else {
       alert('모두 기입해주세요');
@@ -62,33 +73,37 @@ function SearchBar({ isRoundTrip, history }) {
   return (
     <Container aria-label="왕복/ 편도 수상 택시 선택">
       <Location
-        modalState={[isModalOn, openModal, closeModal]}
+        size="40%"
+        spots={spots}
+        modalState={[selectBoxState, openModal, closeModal]}
         departureState={[departure, setDeparture]}
         arrivalState={[arrival, setArrival]}
         switchSpot={switchSpot}
       />
-      <Date
-        size="30%"
+      <DateInput
         isRoundTrip={isRoundTrip}
-        calendarState={[isModalOn.date, openModal, closeModal]}
+        size="30%"
+        calendarState={[selectBoxState.date, openModal, closeModal]}
+        setDate={setDate}
       />
       <Passenger
         size="23%"
-        selectBoxState={[isModalOn.passenger, openModal, closeModal]}
+        selectBoxState={[selectBoxState.passenger, openModal, closeModal]}
         passenger={passenger}
         selectedSeat={seat}
         add={add}
         substract={substract}
         setSeat={setSeat}
       />
-      <SubmitButton
+      <SearchButton
         size="7%"
-        type="submit"
-        color="blue"
-        onClick={() => goToList(departure.name, arrival.name)}
+        type="button"
+        color="main"
+        textColor="#333"
+        onClick={search}
       >
         검색
-      </SubmitButton>
+      </SearchButton>
     </Container>
   );
 }
@@ -98,9 +113,10 @@ export default withRouter(SearchBar);
 const Container = styled.form`
   ${({ theme }) => theme.flexBox('between', 'stretch')}
   height: 48px;
+  width: 1050px;
 `;
 
-const SubmitButton = styled(Button)`
+const SearchButton = styled(Button)`
   margin-left: 4px;
   flex-basis: ${({ size }) => size};
 `;

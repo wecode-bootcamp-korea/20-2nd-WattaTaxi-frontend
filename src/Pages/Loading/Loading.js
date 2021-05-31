@@ -1,16 +1,29 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import DestinationBox from './Components/DestinationBox';
+import Destination from './Components/Destination';
+import LineTo from '../../Components/LineTo';
 
-function Loading() {
+function Loading({ departure, arrival, date }) {
+  const [departureName, departureCode] = departure.split(',');
+  const [arrivalName, arrivalCode] = arrival.split(',');
+  const [departureDate, arrivalDate] = date.split(',');
+
   return (
     <Container>
       <Description>
-        <span>김포</span>에서 <span>제주</span>까지
+        <span>{departureName}</span>에서 <span>{arrivalName}</span>까지
         <br />
-        왕복 항공권을 찾고 있습니다.
+        항공권을 찾고 있습니다.
       </Description>
-      <DestinationBox />
+      <DestinationBox>
+        <Destination
+          code={departureCode}
+          spot={departureName}
+          date={departureDate}
+        />
+        <LineTo color="rgba(256, 256, 256, 0.5)" />
+        <Destination code={arrivalCode} spot={arrivalName} date={arrivalDate} />
+      </DestinationBox>
       <Description small>
         와타택시에서 숙소 예약하고
         <br />
@@ -118,4 +131,13 @@ const Icon = styled.div`
     background-position-y: 0;
     animation: ${loading} 2s step-end infinite;
   }
+`;
+
+const DestinationBox = styled.div`
+  position: relative;
+  ${({ theme }) => theme.flexBox('around', 'center')};
+  margin: 32px 0;
+  padding: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 `;

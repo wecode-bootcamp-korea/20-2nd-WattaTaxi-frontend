@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Destination({ course }) {
+function Destination({ code, spot, date }) {
+  const [year, month, day] = date.split('-');
+
   return (
     <Container>
-      <Code>{course.code}</Code>
-      <Spot>{course.spot}</Spot>
-      <Date>{course.date}</Date>
+      <Code>{code}</Code>
+      <Spot>{spot}</Spot>
+      <Date>{`${year}년 ${month}월 ${day}일`}</Date>
     </Container>
   );
 }

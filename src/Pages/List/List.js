@@ -3,8 +3,12 @@ import styled from 'styled-components';
 import { bold, size, color } from './Components/fontStyle';
 import Course, { SelectedCourse } from './Components/Course';
 import CheckBoxes from './Components/Checkbox';
+import Loading from '../Loading/Loading';
+import { isEmpty } from '../../util';
 
-function List() {
+function List({ match }) {
+  const { departure, arrival, date } = match.params;
+  const [courses, setCourses] = useState([]);
   const [checkCompany, setCheckCompany] = useState({
     다술: true,
     다모: true,
@@ -29,10 +33,14 @@ function List() {
   };
 
   useEffect(() => {
-    const arr = Object.keys(checkCompany).filter(key => checkCompany[key]);
+    const companyArr = Object.keys(checkCompany).filter(
+      key => checkCompany[key]
+    );
   }, [checkCompany]);
 
-  return (
+  return isEmpty(courses) ? (
+    <Loading departure={departure} arrival={arrival} date={date} />
+  ) : (
     <Container>
       <Main>
         <ul>
