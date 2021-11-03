@@ -6,7 +6,6 @@ import DetailReserve from './Components/DetailReserve';
 import { API } from '../../config';
 import { useParams } from 'react-router-dom';
 import Nav from '../../Components/Nav';
-import Footer from '../Main/Components/MainFooter';
 
 const isValidObject = obj => !!Object.keys(obj).length;
 
@@ -50,7 +49,6 @@ const DetailDrivers = () => {
         </DetailMain>
         <DetailReserve />
       </Container>
-      <Footer />
     </>
   );
 };

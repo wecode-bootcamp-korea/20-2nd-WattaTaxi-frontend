@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { API } from '../../../src/config';
 import { GetToken, SetToken } from '../../Components/GetSetToken';
 import Nav from '../../Components/Nav';
-import Footer from '../Main/Components/MainFooter';
 
 const { Kakao } = window;
 
@@ -18,6 +17,7 @@ const Login = ({ history }) => {
   const KakaoLogin = () => {
     Kakao.Auth.login({
       success: function (authObj) {
+        // http://3.34.199.216:8000/users/kakaosignin
         fetch(`${API.KAKAO_SIGNIN_AND_SIGNUP}`, {
           method: 'POST',
           body: JSON.stringify({
@@ -72,7 +72,6 @@ const Login = ({ history }) => {
           </SignUpButton>
         </SignUpArea>
       </LoginContainer>
-      <Footer />
     </>
   );
 };

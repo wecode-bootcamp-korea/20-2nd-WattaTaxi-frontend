@@ -193,9 +193,7 @@ const LogoText = styled.span`
   font-size: 26px;
   font-weight: bold;
   cursor: pointer;
-  color: ${props =>
-    props.inputColor || props.theme.main}; //props.theme.inputColor 외안됨
-  /* color: ${({ theme }) => theme.main}; */
+  color: ${props => props.inputColor || props.theme.main};
 `;
 
 const MiniSearchBar = styled.input`
@@ -240,9 +238,12 @@ const NavButton = styled.button`
   background-color: transparent;
   border: none;
   padding: 2px 15px 10px 15px;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
 
   &:hover {
-    border-bottom: 3px solid skyblue;
+    border-bottom-color: skyblue;
+    transition: all 200ms ease-in-out;
   }
 `;
 

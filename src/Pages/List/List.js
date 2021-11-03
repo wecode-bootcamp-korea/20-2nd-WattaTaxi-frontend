@@ -9,7 +9,6 @@ import { API } from '../../config';
 import InputRange from './Components/InputRange';
 import Button from '../../Components/Button';
 import Nav from '../../Components/Nav';
-import Footer from '../Main/Components/MainFooter';
 
 function List({ location }) {
   // 쿼리스트링 처리 =================
@@ -252,7 +251,6 @@ function List({ location }) {
           )}
         </Main>
       </Container>
-      <Footer />
     </>
   );
 }

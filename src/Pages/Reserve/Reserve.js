@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { bold, size, color } from '../List/Components/fontStyle';
 import LineTo from '../../Components/LineTo';
 import Nav from '../../../src/Components/Nav';
-import Footer from '../Main/Components/MainFooter';
 
 function Reserve() {
   const [reservedTaxi, setReservedTaxi] = useState([]);
@@ -18,7 +17,6 @@ function Reserve() {
       .then(res => res.json())
       .then(data => {
         setReservedTaxi(data.result);
-        console.log(data);
       });
   }, []);
 
@@ -153,7 +151,6 @@ function Reserve() {
           )}
         </GeneralSection>
       </General>
-      <Footer />
     </>
   );
 }

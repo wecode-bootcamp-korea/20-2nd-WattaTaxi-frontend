@@ -8,18 +8,18 @@ function MainBanner() {
 
   useEffect(() => {
     fetch('/data/MockData.json')
-      .then(res => res.json())
-      .then(data => {
-        setBanner(data.banner);
+      .then(bannerSource => bannerSource.json())
+      .then(bannerData => {
+        setBanner(bannerData.banner);
       });
   }, []);
 
   return (
-    <Section>
+    <Section aria-label="광고 슬라이더">
       <Carousel>
         {bannerBox.map((banner, index) => (
           <div key={index}>
-            <img src={banner.imageUrl} alt="" />
+            <img src={banner.imageUrl} alt="광고 이미지" />
           </div>
         ))}
       </Carousel>

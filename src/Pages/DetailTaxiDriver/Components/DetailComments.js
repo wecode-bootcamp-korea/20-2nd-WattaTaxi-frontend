@@ -99,7 +99,6 @@ const DetailComments = props => {
       .then(res => res.json())
       .then(review => {
         SetcommentList(review.reviews);
-        console.log(review);
         Setcomment('');
       });
   }, [refreshPage, props.id]);
@@ -148,7 +147,7 @@ const DetailComments = props => {
             <ReviewDeleteButton
               onClick={() => deleteReviewData(commentValue.review_id)}
             >
-              <i class="fas fa-trash"></i>
+              <i className="fas fa-trash"></i>
             </ReviewDeleteButton>
           </ReviewContainer>
         ))}

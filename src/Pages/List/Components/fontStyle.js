@@ -6,10 +6,14 @@ export const bold = css`
 
 export const size = value => {
   const sizes = {
+    xxs: '12px',
     xs: '13px',
     s: '14px',
     m: '16px',
     l: '20px',
+    sm_head: '24px',
+    md_head: '30px',
+    head: '40px',
   };
   return css`
     font-size: ${sizes[value]};

@@ -5,11 +5,11 @@ function DetailReserve() {
     <div>
       <DetailSide>
         <DateButton>
-          <i class="fas fa-calendar-week"></i>
+          <i className="fas fa-calendar-week"></i>
           <p>날짜를 선택해주세요</p>
         </DateButton>
         <DateButton>
-          <i class="far fa-clock"></i>
+          <i className="far fa-clock"></i>
           <p>시간을 선택해주세요</p>
         </DateButton>
         <ButtonContainer>

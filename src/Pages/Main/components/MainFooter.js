@@ -1,95 +1,117 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
+import { size, bold, color } from '../../List/Components/fontStyle';
 
 function MainFooter() {
-  const [inputs, setInputs] = useState([]);
+  const [SNSData, setSNSData] = useState([]);
 
   useEffect(() => {
-    fetch('/data/MockData.json')
-      .then(res => res.json())
-      .then(data => {
-        setInputs(data.sns);
-      });
+    const footerData = async () => {
+      try {
+        const successData = await axios.get('/data/MockData.json');
+        setSNSData(successData.data.sns);
+      } catch (error) {
+        console.log('ERROR: Footer 이미지에 대한 내용이 없습니다.');
+      }
+    };
+    footerData();
   }, []);
 
   return (
-    <Container>
-      <Footer>
-        <img src="./images/profile.png" alt="" />
-        <InviteFriend>
-          <p>
-            친구 초대하면 <span>무제한 포인트</span>를 드립니다!
+    <Footer aria-label="혜택 및 SNS 광고">
+      <PointBanner>
+        <ImageContainer>
+          <img src="./images/profile.png" aria-label="사용자이미지" />
+        </ImageContainer>
+
+        <BannerContent>
+          <p className="bannerInfo" aria-label="광고내용">
+            친구 초대하면 <strong>무제한 포인트</strong>를 드립니다!
           </p>
           <span>친구에게 5,000원 쿠폰을 선물하고 2,000 포인트를 받으세요.</span>
-        </InviteFriend>
-        <Button>포인트 받기</Button>
-      </Footer>
+        </BannerContent>
+        <ButtonContainer>
+          <PointButton>포인트 받기</PointButton>
+        </ButtonContainer>
+      </PointBanner>
       <Section>
-        <h1>Wa::tta Taxi의 여행 정보</h1>
-        <TripSns>
-          {inputs.map((input, index) => (
-            <Sns key={index}>
-              <img src={input.imageUrl} alt="" />
-              <span>{input.text}</span>
-              <p>{input.description}</p>
-            </Sns>
+        <h1 title="여행 정보">Wa::tta Taxi의 여행 정보</h1>
+        <SNSContainer>
+          {SNSData.map((snsDatas, index) => (
+            <SNSContent key={index}>
+              <img src={snsDatas.imageUrl} alt="sns 로고 이미지" />
+              <span className="snsPageName">{snsDatas.text}</span>
+              <p>{snsDatas.description}</p>
+            </SNSContent>
           ))}
-        </TripSns>
+        </SNSContainer>
       </Section>
-    </Container>
+    </Footer>
   );
 }
 
-const Container = styled.div`
-  margin: 0 auto;
-  width: 1070px;
+const Footer = styled.footer`
+  ${({ theme }) => theme.columnFlexBox()};
+  margin: 100px auto 0;
+  width: 1050px;
+  bottom: 0;
 `;
 
-const Footer = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 27px 32px;
-  margin-top: 50px;
-  margin-bottom: 56px;
+const PointBanner = styled.div`
+  ${({ theme }) => theme.flexBox('between', 'center')}
+  margin-bottom: 50px;
+  height: 110px;
   border-radius: 4px;
   border: 1px solid #e7f4fd;
   background-color: #f5fbff;
+`;
 
+const ImageContainer = styled.div`
+  ${({ theme }) => theme.flexBox('center')};
+  width: 100px;
   img {
-    margin-right: 20px;
+    ${({ theme }) => theme.flexBox('center')};
     width: 70px;
-    height: 55px;
   }
 `;
 
-const InviteFriend = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  height: 56px;
+const BannerContent = styled.div`
+  ${({ theme }) => theme.columnFlexBox()}
+  flex-grow: 1;
+  margin-left: 20px;
+  height: 60px;
 
-  p {
+  .bannerInfo {
     margin-top: 5px;
     margin-bottom: 12px;
-    font-size: 19px;
-    font-weight: 600;
-    span {
-      color: #2b96ed;
+    ${size('l')};
+    ${bold};
+    strong {
+      color: ${({ theme }) => theme.clearBlue};
     }
   }
 `;
 
-const Button = styled.button`
-  padding: 13px 5px;
+const ButtonContainer = styled.div`
   width: 100px;
-  font-size: 14px;
-  border: 1px solid #51abf3;
-  border-radius: 4px;
-  background-color: #51abf3;
-  color: #fff;
+  margin-right: 20px;
 `;
 
-const Section = styled.div`
+const PointButton = styled.button.attrs({
+  type: 'button',
+  alt: '포인트 받기 버튼',
+})`
+  padding: 13px 5px;
+  width: 100px;
+  ${size('s')};
+  color: #fff;
+  background-color: ${({ theme }) => theme.clearBlue};
+  border-radius: 4px;
+  cursor: pointer;
+`;
+
+const Section = styled.section`
   margin-bottom: 120px;
   letter-spacing: 0px;
 
@@ -101,19 +123,18 @@ const Section = styled.div`
   }
 `;
 
-const TripSns = styled.div`
-  text-align: center;
-  padding: 42px 0px;
-  width: 1070px;
+const SNSContainer = styled.div`
+  ${({ theme }) => theme.flexBox('center')}
   border: 1px solid #dee2e6;
   background-color: #f8f9fa;
 `;
 
-const Sns = styled.div`
-  display: inline-block;
-  text-align: left;
-  margin-right: 56px;
-  width: 244px;
+const SNSContent = styled.div`
+  ${({ theme }) => theme.columnFlexBox()}
+  padding: 40px 50px;
+  &:last-child {
+    margin-right: 0;
+  }
 
   img {
     width: 32px;
@@ -121,17 +142,16 @@ const Sns = styled.div`
     background-color: transparent;
   }
 
-  span {
+  .snsPageName {
     margin: 8px 0px 10px 0px;
-    display: block;
     font-size: 15px;
-    font-weight: 700;
-    color: #2b96ed;
+    ${bold};
+    color: ${({ theme }) => theme.clearBlue};
   }
 
   p {
-    color: #666d75;
-    font-size: 14px;
+    ${color(200)};
+    ${size('s')};
     line-height: 1.71;
   }
 `;
