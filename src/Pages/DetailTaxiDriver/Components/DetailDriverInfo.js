@@ -4,11 +4,11 @@ import styled from 'styled-components';
 const DetailDriverInfo = props => {
   const getStar = grade => {
     const yellowGrade = Math.floor(grade);
-    const yellowStar = [...Array(yellowGrade)].map(index => (
-      <I key={index} color="true" size="true" className="fas fa-star" />
+    const yellowStar = [...Array(yellowGrade)].map(() => (
+      <I color="true" size="true" className="fas fa-star" />
     ));
-    const grayStar = [...Array(5 - yellowGrade)].map(index => (
-      <I key={index} size="true" className="fas fa-star" />
+    const grayStar = [...Array(5 - yellowGrade)].map(() => (
+      <I size="true" className="fas fa-star" />
     ));
 
     return [...yellowStar, ...grayStar];
